@@ -1,4 +1,4 @@
-const {snakeToCamel} = require('./helpers');
+const { snakeToCamel } = require('./helpers');
 
 const inputNames = [
   'REMOTE_HOST', 'REMOTE_USER', 'REMOTE_PORT',
@@ -46,6 +46,6 @@ inputNames.forEach((input) => {
 
 inputs.sshServer = `${inputs.remoteUser}@${inputs.remoteHost}`;
 inputs.rsyncServer = `${inputs.remoteUser}@${inputs.remoteHost}:${inputs.target}`;
-inputs['sshCmdArgs'] += ` -e 'ssh -A -J ${{proxyHost}}:${{proxyPort}}'`;
+inputs.sshCmdArgs = `${inputs.sshCmdArgs} -e 'ssh -A -J ${inputs.proxyHost}:${inputs.proxyPort}'`;
 
 module.exports = inputs;
