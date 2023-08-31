@@ -5,6 +5,12 @@ inputs:
   SSH_PRIVATE_KEY:
     description: "Private key part of an SSH key pair"
     required: true
+  PROXY_HOST:
+    description: "Proxy host"
+    required: true
+  PROXY_PORT:
+    description: "Proxy port"
+    required: true
   REMOTE_HOST:
     description: "Remote host"
     required: true
