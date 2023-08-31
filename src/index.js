@@ -11,7 +11,7 @@ const run = async () => {
     deployKeyName, sshPrivateKey,
     args, exclude, sshCmdArgs,
     scriptBefore, scriptAfter,
-    rsyncServer
+    rsyncServer, proxyPort, proxyHost
   } = inputs;
   // Validate required inputs
   validateRequiredInputs({ sshPrivateKey, remoteHost, remoteUser });
@@ -20,7 +20,7 @@ const run = async () => {
   const { path: privateKeyPath } = getPrivateKeyPath(deployKeyName);
   // Update known hosts if ssh command is present to avoid prompt
   if (scriptBefore || scriptAfter) {
-    updateKnownHosts(remoteHost, remotePort);
+    updateKnownHosts(proxyHost, proxyPort);
   }
   // Check Script before
   if (scriptBefore) {

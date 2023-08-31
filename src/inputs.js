@@ -1,10 +1,10 @@
-const { snakeToCamel } = require('./helpers');
+const {snakeToCamel} = require('./helpers');
 
 const inputNames = [
   'REMOTE_HOST', 'REMOTE_USER', 'REMOTE_PORT',
   'SSH_PRIVATE_KEY', 'DEPLOY_KEY_NAME',
   'SOURCE', 'TARGET', 'ARGS', 'SSH_CMD_ARGS', 'EXCLUDE',
-  'SCRIPT_BEFORE', 'SCRIPT_AFTER'];
+  'SCRIPT_BEFORE', 'SCRIPT_AFTER', 'PROXY_HOST', 'PROXY_PORT'];
 
 const githubWorkspace = process.env.GITHUB_WORKSPACE;
 const remoteUser = process.env.REMOTE_USER || process.env.INPUT_REMOTE_USER;
@@ -46,5 +46,5 @@ inputNames.forEach((input) => {
 
 inputs.sshServer = `${inputs.remoteUser}@${inputs.remoteHost}`;
 inputs.rsyncServer = `${inputs.remoteUser}@${inputs.remoteHost}:${inputs.target}`;
-
+inputs['sshCmdArgs'] += ` -e 'ssh -A -J ${{proxyHost}}:${{proxyPort}}'`;
 module.exports = inputs;
